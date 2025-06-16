@@ -1,5 +1,5 @@
-document.getElementById("dati").addEventListener("submit", function (e) {
-  e.preventDefault();
+document.getElementById("dati").addEventListener("submit", function (e) 
+  e.preventDefault();{
 console.log("ciao")
   const jobType = document.getElementById("jobType").value;
   const promoCode = document.getElementById("promoCode").value.trim().toUpperCase();
