@@ -22,5 +22,6 @@
         alert("Codice promozionale non valido.");
       }
     }
-    priceOutput.textContent = "€ " + prezzo.toFixed(2).replace(".", ",");
+    document.getElementById("FinalPrice").innerText = "€" + price.toFixed(2);
+    document.getElementById("promoMessage").innerText = Message;
   });
