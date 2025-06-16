@@ -1,5 +1,6 @@
-document.getElementById(tipo-lavoro).addEventListener("submit", function (e) {
+document.getElementById("tipo-lavoro").addEventListener("submit", function (e) {
   e.preventDefault();
+  console.log (tipo-lavoro)
 
    const jobType = document.getElementById("jobType").value;
   const promoCode = document.getElementById("promoCode").value.trim().toUpperCase();
