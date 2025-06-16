@@ -1,7 +1,7 @@
-document.getElementById("quoteForm").addEventListener("submit", function (e) {
+document.getElementById(tipo-lavoro).addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const jobType = document.getElementById("jobType").value;
+   const jobType = document.getElementById("jobType").value;
   const promoCode = document.getElementById("promoCode").value.trim().toUpperCase();
   const validCodes = ["YHDNU32", "JANJC63", "PWKCN25", "SJDPO96", "POCIE24"];
   const hours = 10;
