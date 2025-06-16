@@ -1,27 +1,50 @@
-  const form = document.getElementById("preventivo-form"); 
-  const priceOutput = document.getElementById("final-price");
-//orari
-  const hourlyRates = {
-    backend: 20.5,
-    frontend: 15.3,
-    analysis: 33.6
-  };
-//verifia codici promozionali
-  const promoCodes = ["YHDNU32", "JANJC63", "PWKCN25", "SJDPO96", "POCIE24"];
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const tipoLavoro = document.getElementById("tipo-lavoro").value;
-    const promoCode = document.getElementById("promo-code").value.trim().toUpperCase();
-    const ore = 10;
-    if (!tipoLavoro) return;
-    let prezzo = hourlyRates[tipoLavoro] * ore;
-    if (promoCode !== "") {
-      if (promoCodes.includes(promoCode)) {
-        prezzo *= 0.75; // Sconto 25%
-      } else {
-        alert("Codice promozionale non valido.");
-      }
+document.getElementById("quoteForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const jobType = document.getElementById("jobType").value;
+  const promoCode = document.getElementById("promoCode").value.trim().toUpperCase();
+  const validCodes = ["YHDNU32", "JANJC63", "PWKCN25", "SJDPO96", "POCIE24"];
+  const hours = 10;
+  let rate = 0;
+
+  // Imposta il rate in base al tipo di lavoro
+  switch (jobType) {
+    case "backend":
+      rate = 20.5;
+      break;
+    case "frontend":
+      rate = 15.3;
+      break;
+    case "analysis":
+      rate = 33.6;
+      break;
+    default:
+      rate = 0;
+  }
+
+  let price = rate * hours;
+  let discount = 0;
+  let message = "";
+
+  // Controllo validità del codice con un ciclo for
+  let isCodeValid = false;
+  for (let i = 0; i < validCodes.length; i++) {
+    if (promoCode === validCodes[i]) {
+      isCodeValid = true;
+      break;
     }
-    document.getElementById("FinalPrice").innerText = "€" + price.toFixed(2);
-    document.getElementById("promoMessage").innerText = Message;
-  });
+  }
+
+  // Calcola sconto se valido
+  if (promoCode && isCodeValid) {
+    discount = price * 0.25;
+    price -= discount;
+    message = "Sconto del 25% applicato!";
+  } else if (promoCode && !isCodeValid) {
+    message = "Codice promozionale non valido. Nessuno sconto applicato.";
+  }
+
+  // Stampa il prezzo e il messaggio
+  document.getElementById("finalPrice").innerText = "€ " + price.toFixed(2);
+  document.getElementById("promoMessage").innerText = message;
+});
